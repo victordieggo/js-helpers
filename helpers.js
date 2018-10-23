@@ -4,7 +4,7 @@
  * Author: Victor Diego <victordieggo@gmail.com>
  * License: MIT
  * ================================================================== */
-
+// eslint-disable-next-line no-unused-vars
 const helpers = {
 
   /* ---------------------------------------------------------------------
@@ -15,8 +15,9 @@ const helpers = {
     'use strict';
     if (element.fireEvent) {
       (element.fireEvent('on' + eventType));
+      return;
     } else {
-      var evObj = document.createEvent('Events');
+      const evObj = document.createEvent('Events');
       evObj.initEvent(eventType, true, false);
       element.dispatchEvent(evObj);
     }
@@ -59,7 +60,7 @@ const helpers = {
   validateText: (name) => {
     'use strict';
     name = name.replace(/ /g, '');
-    var regex = /^[a-záàâãéèêíïóôõöúçñ ]+$/i;
+    const regex = /^[a-záàâãéèêíïóôõöúçñ ]+$/i;
     if (regex.test(name)) {
       return true;
     }
@@ -72,7 +73,7 @@ const helpers = {
 
   validateEmail: (email) => {
     'use strict';
-    var regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if (regex.test(email)) {
       return true;
     }
@@ -92,13 +93,13 @@ const helpers = {
       return;
     }
 
-    for (var i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
       if (phone == Array(11).join(i) || phone == Array(12).join(i)) {
         return;
       }
     }
 
-    var ddd = [
+    const ddd = [
       11, 12, 13, 14, 15, 16, 17, 18, 19,
       21, 22, 24, 27, 28, 31, 32, 33, 34,
       35, 37, 38, 41, 42, 43, 44, 45, 46,
@@ -122,7 +123,7 @@ const helpers = {
   validateCnpj: (cnpj) => {
     'use strict';
 
-    cnpj = numbersOnly(cnpj);
+    cnpj = this.numbersOnly(cnpj);
 
     if (cnpj.length != 14) {
       return;

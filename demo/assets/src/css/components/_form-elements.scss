@@ -1,0 +1,130 @@
+/*
+=======================================================
+Form Elements
+=======================================================
+1. Base Styles
+2. Custom Checkbox/Radio
+3. Custom Select
+4. Disabled Elements
+=======================================================
+*/
+
+/*
+-------------------------------------------------------
+1. Base Styles
+-------------------------------------------------------
+*/
+
+.input,
+.select,
+.input-icon {
+  @include vcenter;
+  appearance: none;
+  background-color: color(light);
+  border: solid 1px color(grey);
+  border-radius: $fe-borderRadius;
+  padding: 0.65em;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.input:not(textarea),
+.select:not([multiple]) {
+  height: 2.75em;
+}
+
+.input:focus,
+.select:focus,
+:focus + .input-icon {
+  border-color: color(darkgrey);
+  box-shadow: 0 0 1px color(darkgrey);
+  outline: none;
+}
+
+@each $prefix in ':-ms', '::-webkit' {
+  #{$prefix}-input-placeholder {
+    color: color(darkgrey);
+  }
+}
+
+/*
+-------------------------------------------------------
+2. Custom Checkbox/Radio
+-------------------------------------------------------
+*/
+
+.input-radio,
+.input-checkbox {
+  input {
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+  }
+}
+
+.input-icon {
+  width: 1.5em;
+  height: 1.5em;
+  margin-top: -0.1em;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  .input-radio & {
+    border-radius: 50%;
+  }
+
+  .input-checkbox :checked + & {
+    background-image: url('../../dist/svg/icon-check.svg');
+    background-size: 60%;
+  }
+
+  .input-radio :checked + & {
+    position: relative;
+
+    &::after {
+      @include vcenter;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 0.45em solid color(light);
+      background-color: color(dark);
+    }
+  }
+}
+
+/*
+-------------------------------------------------------
+4. Custom Select
+-------------------------------------------------------
+*/
+
+.select:not([multiple]) {
+  background: url('../../dist/svg/icon-arrow-alt.svg') right 0.6em center no-repeat;
+  background-size: 0.85em 1em;
+  padding-right: 2.4em;
+}
+
+/*
+-------------------------------------------------------
+3. Disabled Elements
+-------------------------------------------------------
+*/
+
+.is-disabled {
+  pointer-events: none;
+  color: color(darkgrey);
+
+  &:not(.input-checkbox):not(.input-radio) {
+    background-color: color(lightgrey);
+  }
+
+  .input-icon {
+    background-color: color(lightgrey);
+  }
+}
